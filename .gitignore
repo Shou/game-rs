@@ -1,0 +1,4 @@
+/target
+assets/*
+!assets/README.md
+!assets/*.ron
