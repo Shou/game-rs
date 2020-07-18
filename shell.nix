@@ -15,26 +15,18 @@ in mkShell rec {
     cargo
     rustc
     rust-analyzer
-    xlibs.libX11.dev
-    alsaLib
-    alsaLib.dev
-    cmake
     python3
-    freetype
-    toybox
-    freetype
-    expat
-    vulkan-validation-layers
-  ]);
-
-  APPEND_LIBRARY_PATH = lib.makeLibraryPath (with pkgs; [
-    vulkan-loader
+    xlibs.libxcb
+    xlibs.libX11.dev
     xlibs.libXcursor
-    xlibs.libXi
     xlibs.libXrandr
+    xlibs.libXi
+    wayland
+    wayland-protocols
+    libGL
+    libGLU
+    libglvnd
   ]);
 
-  shellHook = ''
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$APPEND_LIBRARY_PATH"
-  '';
+  LD_LIBRARY_PATH = lib.makeLibraryPath buildInputs;
 }
